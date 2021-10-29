@@ -1,13 +1,24 @@
 import React from "react";
 import styled from "styled-components";
+import Input from "./components/Input";
+import Buttons from "./components/Buttons";
 
 export default function App() {
   return (
-    <div>
-      <CalculatorContainer>hello rld it's helen</CalculatorContainer>
-    </div>
+    <Wrapper>
+      <CalculatorContainer>
+        <Input />
+        <Buttons />
+      </CalculatorContainer>
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  min-width: 550px;
+  min-height: 590px;
+  font-family: Sans-serif;
+`;
 
 const CalculatorContainer = styled.div`
   position: fixed;
