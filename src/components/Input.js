@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function Input() {
+export default function Input(props) {
+  const { userInput } = props;
+
   return (
     <InputField className="input">
-      <p>input</p>
+      <p>{userInput}</p>
     </InputField>
   );
 }
