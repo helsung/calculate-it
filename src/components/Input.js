@@ -16,4 +16,5 @@ const InputField = styled.div`
   height: 70px;
   background: #f8f8f8;
   margin-left: 20px;
+  font-size: 36px;
 `;

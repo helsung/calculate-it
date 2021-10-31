@@ -8,6 +8,7 @@ export default function App() {
 
   const handleInput = (button) => {
     if (button === "AC") clearAll();
+    else if (button === "DEL") backspace();
     else if (button === "=") {
       // validateInput(userInput)
       calculate(userInput);
@@ -18,9 +19,54 @@ export default function App() {
     setUserInput("");
   };
 
+  const backspace = () => {
+    setUserInput(userInput.slice(0, -1));
+  };
+
   const validateInput = () => {};
 
-  const calculate = (input) => {};
+  const calculate = (input) => {
+    let res = 0;
+    let operator = "+";
+    let currNum = 0;
+    let stack = [];
+    let arr = input.split(" ");
+
+    for (let i = 0; i < arr.length; i++) {
+      if (!isNaN(arr[i])) {
+        currNum = Number(arr[i]);
+      }
+
+      if (isNaN(arr[i]) || i === arr.length - 1) {
+        if (arr[i] === "-" && arr[i + 1] === "-") {
+          operator = "+";
+          arr[i + 1] = "+";
+        }
+        updateStack(stack, currNum, operator);
+        operator = arr[i];
+        currNum = 0;
+      }
+    }
+    res = stack.reduce((accum, val) => accum + val);
+    setUserInput(res);
+  };
+
+  const updateStack = (stack, currNum, operator) => {
+    switch (operator) {
+      case "+":
+        stack.push(currNum);
+        break;
+      case "-":
+        stack.push(-currNum);
+        break;
+      case "x":
+        stack.push(stack.pop() * currNum);
+        break;
+      case "÷":
+        stack.push(stack.pop() / currNum);
+        break;
+    }
+  };
 
   return (
     <Wrapper>

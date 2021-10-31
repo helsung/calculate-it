@@ -6,10 +6,10 @@ export default function Buttons(props) {
 
   return (
     <ButtonContainer>
-      <GrayButton value="(" onClick={(evt) => handleInput(evt.target.value)}>
+      <GrayButton value=" ( " onClick={(evt) => handleInput(evt.target.value)}>
         (
       </GrayButton>
-      <GrayButton value=")" onClick={(evt) => handleInput(evt.target.value)}>
+      <GrayButton value=" ) " onClick={(evt) => handleInput(evt.target.value)}>
         )
       </GrayButton>
       <GrayButton value="AC" onClick={(evt) => handleInput(evt.target.value)}>
@@ -29,7 +29,7 @@ export default function Buttons(props) {
         3
       </Button>
       <DarkOrangeButton
-        value="÷"
+        value=" ÷ "
         onClick={(evt) => handleInput(evt.target.value)}
       >
         ÷
@@ -45,10 +45,10 @@ export default function Buttons(props) {
         6
       </Button>
       <DarkOrangeButton
-        value="*"
+        value=" x "
         onClick={(evt) => handleInput(evt.target.value)}
       >
-        *
+        x
       </DarkOrangeButton>
 
       <Button value="7" onClick={(evt) => handleInput(evt.target.value)}>
@@ -61,7 +61,7 @@ export default function Buttons(props) {
         9
       </Button>
       <DarkOrangeButton
-        value="-"
+        value=" - "
         onClick={(evt) => handleInput(evt.target.value)}
       >
         -
@@ -78,7 +78,7 @@ export default function Buttons(props) {
         ={" "}
       </Button>
       <DarkOrangeButton
-        value="+"
+        value=" + "
         onClick={(evt) => handleInput(evt.target.value)}
       >
         +
@@ -102,6 +102,7 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 36px;
   cursor: pointer;
   &:hover {
     opacity: 0.9;
