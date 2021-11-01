@@ -11,7 +11,7 @@ export default function App() {
     else if (button === "DEL") backspace();
     else if (button === "=") {
       // validateInput(userInput)
-      calculate(userInput);
+      calculate(convertToArr(userInput));
     } else setUserInput(userInput + button);
   };
 
@@ -20,32 +20,50 @@ export default function App() {
   };
 
   const backspace = () => {
-    setUserInput(userInput.slice(0, -1));
+    if (userInput) {
+      let inputArr = convertToArr(userInput);
+      setUserInput(inputArr.slice(0, -1).join(" "));
+    }
+  };
+
+  const convertToArr = function (input) {
+    return input.split(" ").filter((el) => el);
   };
 
   const validateInput = () => {};
 
-  const calculate = (input) => {
+  const calculate = (arr, i = 0) => {
     let res = 0;
     let operator = "+";
     let currNum = 0;
     let stack = [];
-    let arr = input.split(" ");
-
-    for (let i = 0; i < arr.length; i++) {
-      if (!isNaN(arr[i])) {
-        currNum = Number(arr[i]);
-      }
-
-      if (isNaN(arr[i]) || i === arr.length - 1) {
-        if (arr[i] === "-" && arr[i + 1] === "-") {
-          operator = "+";
-          arr[i + 1] = "+";
-        }
+    while (i <= arr.length) {
+      if (arr[i] === "(") {
+        i++;
+        let [res, idx] = calculate(arr, i);
+        updateStack(stack, res, operator);
+        i = idx++;
+        operator = arr[i++];
+        continue;
+      } else if (arr[i] === ")") {
         updateStack(stack, currNum, operator);
-        operator = arr[i];
-        currNum = 0;
+        res = stack.reduce((accum, val) => accum + val);
+        return [res, i];
+      } else {
+        if (!isNaN(arr[i])) {
+          currNum = Number(arr[i]);
+        }
+
+        if (isNaN(arr[i]) || i === arr.length - 1) {
+          if (arr[i] === "-" && arr[i + 1] === "-") {
+            operator, (arr[i + 1] = "+");
+          }
+          updateStack(stack, currNum, operator);
+          operator = arr[i];
+          currNum = 0;
+        }
       }
+      i++;
     }
     res = stack.reduce((accum, val) => accum + val);
     setUserInput(res);
