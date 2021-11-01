@@ -4,6 +4,24 @@ import styled from "styled-components";
 export default function Buttons(props) {
   const { handleInput } = props;
 
+  const handleKeyPress = (key) => {
+    console.log(key);
+    let value = "";
+    switch (key) {
+      case "1":
+        value = "1";
+        break;
+      case "2":
+        value = "2";
+        break;
+      case "3":
+        value = "3";
+        break;
+    }
+    console.log(value);
+    handleInput(value);
+  };
+
   return (
     <ButtonContainer>
       <GrayButton value=" ( " onClick={(evt) => handleInput(evt.target.value)}>
@@ -19,7 +37,11 @@ export default function Buttons(props) {
         ←
       </GrayButton>
 
-      <Button value="1" onClick={(evt) => handleInput(evt.target.value)}>
+      <Button
+        value="1"
+        onClick={(evt) => handleInput(evt.target.value)}
+        onKeyPress={(evt) => handleKeyPress(evt.keyCode)}
+      >
         1
       </Button>
       <Button value="2" onClick={(evt) => handleInput(evt.target.value)}>
@@ -91,7 +113,7 @@ const ButtonContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 24.2%);
   border: 0;
-  margin: 40px 20px;
+  margin: 30px 20px;
   gap: 5px;
 `;
 

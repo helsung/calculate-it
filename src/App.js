@@ -10,8 +10,7 @@ export default function App() {
     if (button === "AC") clearAll();
     else if (button === "DEL") backspace();
     else if (button === "=") {
-      // validateInput(userInput)
-      calculate(convertToArr(userInput));
+      validateInput(userInput) ? calculate(convertToArr(userInput)) : null;
     } else setUserInput(userInput + button);
   };
 
@@ -20,17 +19,38 @@ export default function App() {
   };
 
   const backspace = () => {
-    if (userInput) {
-      let inputArr = convertToArr(userInput);
-      setUserInput(inputArr.slice(0, -1).join(" "));
-    }
+    let inputArr = convertToArr(userInput);
+    setUserInput(inputArr.slice(0, -1).join(" "));
   };
 
   const convertToArr = function (input) {
     return input.split(" ").filter((el) => el);
   };
 
-  const validateInput = () => {};
+  const validateInput = (input) => {
+    let arr = convertToArr(input);
+    let balancedBrackets = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i] === "(") balancedBrackets++;
+      if (arr[i] === ")") balancedBrackets--;
+
+      if (balancedBrackets < 0) {
+        alert("error!");
+        return;
+      }
+
+      if (isNaN(arr[i]) && isNaN(arr[i + 1])) {
+        console.log(arr[i], arr[i + 1]);
+        if (arr[i + 1] !== "-") {
+          alert("error");
+          return;
+        }
+      }
+    }
+
+    return balancedBrackets === 0 ? true : alert("error!");
+  };
 
   const calculate = (arr, i = 0) => {
     let res = 0;
