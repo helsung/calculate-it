@@ -24,10 +24,10 @@ export default function Buttons(props) {
 
   return (
     <ButtonContainer>
-      <GrayButton value=" ( " onClick={(evt) => handleInput(evt.target.value)}>
+      <GrayButton value="(" onClick={(evt) => handleInput(evt.target.value)}>
         (
       </GrayButton>
-      <GrayButton value=" ) " onClick={(evt) => handleInput(evt.target.value)}>
+      <GrayButton value=")" onClick={(evt) => handleInput(evt.target.value)}>
         )
       </GrayButton>
       <GrayButton value="AC" onClick={(evt) => handleInput(evt.target.value)}>
@@ -51,7 +51,7 @@ export default function Buttons(props) {
         3
       </Button>
       <DarkOrangeButton
-        value=" ÷ "
+        value="÷"
         onClick={(evt) => handleInput(evt.target.value)}
       >
         ÷
@@ -67,7 +67,7 @@ export default function Buttons(props) {
         6
       </Button>
       <DarkOrangeButton
-        value=" x "
+        value="x"
         onClick={(evt) => handleInput(evt.target.value)}
       >
         x
@@ -83,7 +83,7 @@ export default function Buttons(props) {
         9
       </Button>
       <DarkOrangeButton
-        value=" - "
+        value="-"
         onClick={(evt) => handleInput(evt.target.value)}
       >
         -
@@ -100,7 +100,7 @@ export default function Buttons(props) {
         ={" "}
       </Button>
       <DarkOrangeButton
-        value=" + "
+        value="+"
         onClick={(evt) => handleInput(evt.target.value)}
       >
         +

@@ -24,7 +24,17 @@ export default function App() {
   };
 
   const convertToArr = (input) => {
-    return input.split(" ").filter((el) => el);
+    //add spaces for non-numerical characters for easy string parsing
+    let spacedInput = "";
+    for (let i = 0; i < input.length; i++) {
+      let char = input[i];
+      if (isNaN(char) && char !== ".") {
+        spacedInput += ` ${char} `;
+      } else {
+        spacedInput += char;
+      }
+    }
+    return spacedInput.split(" ").filter((el) => el);
   };
 
   const validateInput = (input) => {
