@@ -6,88 +6,88 @@ import App from "./App";
 configure({ adapter: new Adapter() });
 
 let wrapper;
+window.alert = jest.fn();
 beforeEach(() => (wrapper = mount(<App />)));
 
 describe("<App> component can validate user input: ", () => {
   it("invalid order of parenthesis will produce an alert", () => {
-    window.alert = jest.fn(); // mock alert method within testing blackbox
+    let invalidInput = ")2-1(";
 
-    wrapper.find('button[value=")"]').simulate("click");
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="-"]').simulate("click");
-    wrapper.find('button[value="1"]').simulate("click");
-    wrapper.find('button[value="("]').simulate("click");
+    for (let i = 0; i < invalidInput.length; i++) {
+      wrapper.find(`button[value="${invalidInput[i]}"]`).simulate("click");
+    }
+
     wrapper.find('button[value="="]').simulate("click");
-
     expect(window.alert).toHaveBeenCalledWith(
       "Please enter a valid expression!"
     );
-    // window.alert.mockClear() //global object and its calls will persist across tests??
+    window.alert.mockClear(); //global object and its calls will persist across tests??
   });
 
-  it("Unbalanced parenthesis will produce an alert", () => {
-    window.alert = jest.fn(); // mock alert method within testing blackbox
+  it("unbalanced parenthesis will produce an alert", () => {
+    let invalidInput = "(2-1(";
 
-    wrapper.find('button[value="("]').simulate("click");
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="-"]').simulate("click");
-    wrapper.find('button[value="1"]').simulate("click");
-    wrapper.find('button[value="("]').simulate("click");
+    for (let i = 0; i < invalidInput.length; i++) {
+      wrapper.find(`button[value="${invalidInput[i]}"]`).simulate("click");
+    }
+
     wrapper.find('button[value="="]').simulate("click");
-
     expect(window.alert).toHaveBeenCalledWith(
       "Please enter a valid expression!"
     );
+    window.alert.mockClear();
   });
 
-  it("no more than two operators in a series will be supported...", () => {
-    window.alert = jest.fn(); // mock alert method within testing blackbox
+  it("more than two operators in a series will not be supported...", () => {
+    let invalidInput = "2+-+-1";
 
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="+"]').simulate("click");
-    wrapper.find('button[value="-"]').simulate("click");
-    wrapper.find('button[value="+"]').simulate("click");
-    wrapper.find('button[value="1"]').simulate("click");
+    for (let i = 0; i < invalidInput.length; i++) {
+      wrapper.find(`button[value="${invalidInput[i]}"]`).simulate("click");
+    }
+
     wrapper.find('button[value="="]').simulate("click");
-
     expect(window.alert).toHaveBeenCalledWith(
       "Please enter a valid expression!"
     );
+    window.alert.mockClear();
   });
 
   it("...however consecutive (-) operators are supported", () => {
-    // console.log(wrapper.debug());
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="-"]').simulate("click");
-    wrapper.find('button[value="-"]').simulate("click");
-    wrapper.find('button[value="3"]').simulate("click");
+    let input = "2--3";
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
 
-    expect(wrapper.find("p").text()).toBe("2--3");
     wrapper.find('button[value="="]').simulate("click");
     expect(wrapper.find("p").text()).toBe("5");
   });
 });
 
-//backspace
+//backspace and delete
 describe("<App> component can handle various functionalities from <Button> component:", () => {
   it("backspace will delete one element at a time", () => {
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="x"]').simulate("click");
-    wrapper.find('button[value="5"]').simulate("click");
+    let input = "22x5";
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+    expect(wrapper.find("p").text()).toBe("22x5");
+
     wrapper.find('button[value="DEL"]').simulate("click");
     expect(wrapper.find("p").text()).toBe("22x");
+
     wrapper.find('button[value="DEL"]').simulate("click");
     expect(wrapper.find("p").text()).toBe("22");
+
     wrapper.find('button[value="DEL"]').simulate("click");
     expect(wrapper.find("p").text()).toBe("");
   });
 
   it("AC will clear entire entry (All Clear)", () => {
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="2"]').simulate("click");
-    wrapper.find('button[value="x"]').simulate("click");
-    wrapper.find('button[value="5"]').simulate("click");
+    let input = "22x5";
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+
     expect(wrapper.find("p").text()).toBe("22x5");
     wrapper.find('button[value="AC"]').simulate("click");
     expect(wrapper.find("p").text()).toBe("");
@@ -95,3 +95,48 @@ describe("<App> component can handle various functionalities from <Button> compo
 });
 
 //calculate
+describe("<App> component can calculate valid expressions:", () => {
+  it("can support decimals", () => {
+    let input = "-.32÷.5";
+
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+
+    wrapper.find('button[value="="]').simulate("click");
+    expect(wrapper.find("p").text()).toBe("-0.64");
+  });
+
+  it("can support standard mathematical order of operations", () => {
+    let input = "-5+-8--11x2";
+
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+
+    wrapper.find('button[value="="]').simulate("click");
+    expect(wrapper.find("p").text()).toBe("9");
+  });
+
+  it("can support parenthesis", () => {
+    let input = "(4-2)x3.5";
+
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+
+    wrapper.find('button[value="="]').simulate("click");
+    expect(wrapper.find("p").text()).toBe("7");
+  });
+
+  it("can support nested parenthesis", () => {
+    let input = "1+(5x(5-2)÷3)";
+
+    for (let i = 0; i < input.length; i++) {
+      wrapper.find(`button[value="${input[i]}"]`).simulate("click");
+    }
+
+    wrapper.find('button[value="="]').simulate("click");
+    expect(wrapper.find("p").text()).toBe("6");
+  });
+});
