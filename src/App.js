@@ -23,11 +23,13 @@ export default function App() {
     setUserInput(inputArr.slice(0, -1).join(" "));
   };
 
-  const convertToArr = function (input) {
+  const convertToArr = (input) => {
     return input.split(" ").filter((el) => el);
   };
 
   const validateInput = (input) => {
+    let operators = ["+", "-", "x", "/"];
+    let errorMsg = "Please enter a valid expression!";
     let arr = convertToArr(input);
     let balancedBrackets = 0;
 
@@ -36,20 +38,19 @@ export default function App() {
       if (arr[i] === ")") balancedBrackets--;
 
       if (balancedBrackets < 0) {
-        alert("error!");
+        alert(errorMsg);
         return;
       }
 
-      if (isNaN(arr[i]) && isNaN(arr[i + 1])) {
-        console.log(arr[i], arr[i + 1]);
+      if (operators.includes(arr[i]) && operators.includes(arr[i + 1])) {
         if (arr[i + 1] !== "-") {
-          alert("error");
+          alert(errorMsg);
           return;
         }
       }
     }
 
-    return balancedBrackets === 0 ? true : alert("error!");
+    return balancedBrackets === 0 ? true : alert(errorMsg);
   };
 
   const calculate = (arr, i = 0) => {
