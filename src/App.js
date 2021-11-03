@@ -11,7 +11,9 @@ export default function App() {
     else if (button === "DEL") backspace();
     else if (button === "=") {
       validateInput(userInput) ? calculate(convertToArr(userInput)) : null;
-    } else setUserInput(userInput + button);
+    } else if (userInput.length > 20)
+      alert("Please limit input to 20 characters");
+    else setUserInput(userInput + button);
   };
 
   const clearAll = () => {

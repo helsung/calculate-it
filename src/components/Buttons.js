@@ -112,7 +112,7 @@ const ButtonContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 24.2%);
   border: 0;
-  margin: 30px 20px;
+  margin: 20px 20px;
   gap: 5px;
 `;
 

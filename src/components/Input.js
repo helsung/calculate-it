@@ -6,7 +6,7 @@ export default function Input(props) {
 
   return (
     <InputField className="input">
-      <p>{userInput}</p>
+      <InputText>{userInput}</InputText>
     </InputField>
   );
 }
@@ -17,4 +17,8 @@ const InputField = styled.div`
   background: #f8f8f8;
   margin-left: 20px;
   font-size: 36px;
+`;
+
+const InputText = styled.p`
+  margin-left: 10px;
 `;
