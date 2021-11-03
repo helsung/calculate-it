@@ -4,10 +4,22 @@ import styled from "styled-components";
 export default function Buttons(props) {
   const { handleInput } = props;
 
-  const handleKeyPress = (key) => {
-    console.log(key);
+  const handleKeyDown = (key) => {
     let value = "";
     switch (key) {
+      case "(":
+        value = "(";
+        break;
+      case ")":
+        value = ")";
+        break;
+      case "D":
+        value = "AC";
+        break;
+      case "Backspace":
+        value = "DEL";
+        break;
+
       case "1":
         value = "1";
         break;
@@ -17,93 +29,82 @@ export default function Buttons(props) {
       case "3":
         value = "3";
         break;
+      case "/":
+        value = "÷";
+        break;
+
+      case "4":
+        value = "4";
+        break;
+      case "5":
+        value = "5";
+        break;
+      case "6":
+        value = "6";
+        break;
+      case "*":
+        value = "x";
+        break;
+
+      case "7":
+        value = "7";
+        break;
+      case "8":
+        value = "8";
+        break;
+      case "9":
+        value = "9";
+        break;
+      case "-":
+        value = "-";
+        break;
+
+      case ".":
+        value = ".";
+        break;
+      case "0":
+        value = "0";
+        break;
+      case "=":
+        value = "=";
+        break;
+      case "+":
+        value = "+";
+        break;
     }
-    console.log(value);
+
     handleInput(value);
   };
 
   return (
-    <ButtonContainer>
-      <GrayButton value="(" onClick={(evt) => handleInput(evt.target.value)}>
-        (
-      </GrayButton>
-      <GrayButton value=")" onClick={(evt) => handleInput(evt.target.value)}>
-        )
-      </GrayButton>
-      <GrayButton value="AC" onClick={(evt) => handleInput(evt.target.value)}>
-        AC
-      </GrayButton>
-      <GrayButton value="DEL" onClick={(evt) => handleInput(evt.target.value)}>
-        ←
-      </GrayButton>
+    <ButtonContainer
+      onKeyDown={(evt) => handleKeyDown(evt.key)}
+      onClick={(evt) => handleInput(evt.target.value)}
+    >
+      <GrayButton value="(">(</GrayButton>
+      <GrayButton value=")">)</GrayButton>
+      <GrayButton value="AC">AC</GrayButton>
+      <GrayButton value="DEL">←</GrayButton>
 
-      <Button
-        value="1"
-        onClick={(evt) => handleInput(evt.target.value)}
-        onKeyPress={(evt) => handleKeyPress(evt.keyCode)}
-      >
-        1
-      </Button>
-      <Button value="2" onClick={(evt) => handleInput(evt.target.value)}>
-        2
-      </Button>
-      <Button value="3" onClick={(evt) => handleInput(evt.target.value)}>
-        3
-      </Button>
-      <DarkOrangeButton
-        value="÷"
-        onClick={(evt) => handleInput(evt.target.value)}
-      >
-        ÷
-      </DarkOrangeButton>
+      <Button value="1">1</Button>
+      <Button value="2">2</Button>
+      <Button value="3">3</Button>
+      <DarkOrangeButton value="÷">÷</DarkOrangeButton>
 
-      <Button value="4" onClick={(evt) => handleInput(evt.target.value)}>
-        4
-      </Button>
-      <Button value="5" onClick={(evt) => handleInput(evt.target.value)}>
-        5
-      </Button>
-      <Button value="6" onClick={(evt) => handleInput(evt.target.value)}>
-        6
-      </Button>
-      <DarkOrangeButton
-        value="x"
-        onClick={(evt) => handleInput(evt.target.value)}
-      >
-        x
-      </DarkOrangeButton>
+      <Button value="4">4</Button>
+      <Button value="5">5</Button>
+      <Button value="6">6</Button>
+      <DarkOrangeButton value="x">x</DarkOrangeButton>
 
-      <Button value="7" onClick={(evt) => handleInput(evt.target.value)}>
-        7
-      </Button>
-      <Button value="8" onClick={(evt) => handleInput(evt.target.value)}>
-        8
-      </Button>
-      <Button value="9" onClick={(evt) => handleInput(evt.target.value)}>
-        9
-      </Button>
-      <DarkOrangeButton
-        value="-"
-        onClick={(evt) => handleInput(evt.target.value)}
-      >
-        -
-      </DarkOrangeButton>
+      <Button value="7">7</Button>
+      <Button value="8">8</Button>
+      <Button value="9">9</Button>
+      <DarkOrangeButton value="-">-</DarkOrangeButton>
 
-      <Button value="." onClick={(evt) => handleInput(evt.target.value)}>
-        .
-      </Button>
-      <Button value="0" onClick={(evt) => handleInput(evt.target.value)}>
-        0
-      </Button>
-      <Button value="=" onClick={(evt) => handleInput(evt.target.value)}>
-        =
-      </Button>
-      <DarkOrangeButton
-        value="+"
-        onClick={(evt) => handleInput(evt.target.value)}
-      >
-        +
-      </DarkOrangeButton>
+      <Button value=".">.</Button>
+      <Button value="0">0</Button>
+      <Button value="=">=</Button>
+      <DarkOrangeButton value="+">+</DarkOrangeButton>
     </ButtonContainer>
   );
 }

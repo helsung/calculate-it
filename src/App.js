@@ -13,6 +13,7 @@ export default function App() {
       validateInput(userInput) ? calculate(convertToArr(userInput)) : null;
     } else if (userInput.length > 20)
       alert("Please limit input to 20 characters");
+    else if (button === undefined) return false;
     else setUserInput(userInput + button);
   };
 
