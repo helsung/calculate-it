@@ -20,7 +20,7 @@ export default function App() {
 
   const backspace = () => {
     let inputArr = convertToArr(userInput);
-    setUserInput(inputArr.slice(0, -1).join(" "));
+    setUserInput(inputArr.slice(0, -1).join(""));
   };
 
   const convertToArr = (input) => {

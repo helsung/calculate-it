@@ -96,8 +96,7 @@ export default function Buttons(props) {
         0
       </Button>
       <Button value="=" onClick={(evt) => handleInput(evt.target.value)}>
-        {" "}
-        ={" "}
+        =
       </Button>
       <DarkOrangeButton
         value="+"
