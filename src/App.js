@@ -99,7 +99,7 @@ export default function App() {
       i++;
     }
     res = stack.reduce((accum, val) => accum + val);
-    setUserInput(res);
+    setUserInput(parseFloat(res.toFixed(10)));
   };
 
   const updateStack = (stack, currNum, operator) => {
