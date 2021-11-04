@@ -5,75 +5,30 @@ export default function Buttons(props) {
   const { handleInput } = props;
 
   const handleKeyDown = (key) => {
-    let value = "";
-    switch (key) {
-      case "(":
-        value = "(";
-        break;
-      case ")":
-        value = ")";
-        break;
-      case "D":
-        value = "AC";
-        break;
-      case "Backspace":
-        value = "DEL";
-        break;
+    let keyCode = {
+      "(": "(",
+      ")": ")",
+      D: "AC",
+      Backspace: "DEL",
+      1: "1",
+      2: "2",
+      3: "3",
+      4: "4",
+      5: "5",
+      6: "6",
+      7: "7",
+      8: "8",
+      9: "9",
+      0: "0",
+      ".": ".",
+      "+": "+",
+      "-": "-",
+      "*": "x",
+      "/": "÷",
+      "=": "=",
+    };
 
-      case "1":
-        value = "1";
-        break;
-      case "2":
-        value = "2";
-        break;
-      case "3":
-        value = "3";
-        break;
-      case "/":
-        value = "÷";
-        break;
-
-      case "4":
-        value = "4";
-        break;
-      case "5":
-        value = "5";
-        break;
-      case "6":
-        value = "6";
-        break;
-      case "*":
-        value = "x";
-        break;
-
-      case "7":
-        value = "7";
-        break;
-      case "8":
-        value = "8";
-        break;
-      case "9":
-        value = "9";
-        break;
-      case "-":
-        value = "-";
-        break;
-
-      case ".":
-        value = ".";
-        break;
-      case "0":
-        value = "0";
-        break;
-      case "=":
-        value = "=";
-        break;
-      case "+":
-        value = "+";
-        break;
-    }
-
-    handleInput(value);
+    handleInput(keyCode[key]);
   };
 
   return (
