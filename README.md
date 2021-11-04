@@ -2,6 +2,8 @@
 
 Basic calculator program built for the web.
 
+![img]https://i.imgur.com/JxHIa8k.png[/img]
+
 ### Installation Guide
 
 - `yarn install` or `npm install`
