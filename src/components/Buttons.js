@@ -4,6 +4,10 @@ import styled from "styled-components";
 export default function Buttons(props) {
   const { handleInput } = props;
 
+  /**
+   * Look up keypress event and pass in valid key as a user input
+   * @param {string} key
+   */
   const handleKeyDown = (key) => {
     let keyCode = {
       "(": "(",
