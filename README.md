@@ -2,7 +2,7 @@
 
 Basic calculator program built for the web.
 
-![img]https://i.imgur.com/JxHIa8k.png[/img]
+![img](https://i.imgur.com/JxHIa8k.png)
 
 ### Installation Guide
 
