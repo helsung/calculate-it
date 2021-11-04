@@ -112,7 +112,7 @@ export default function App() {
           currNum = +inputArr[i];
         }
 
-        //detect an operator or if we are at last element to update stack
+        //detect an operator or if we are at the last element to update stack
         if (isNaN(inputArr[i]) || i === inputArr.length - 1) {
           if (inputArr[i] === "-" && inputArr[i + 1] === "-") {
             operator, (inputArr[i + 1] = "+");
