@@ -1,6 +1,7 @@
 # CalculateIt!
 
 Basic calculator program built for the web.
+https://calculate-it.herokuapp.com/
 
 ![img](https://i.imgur.com/JxHIa8k.png)
 
